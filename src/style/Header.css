@@ -11,7 +11,7 @@
 .header_p,
 a {
     text-decoration: none;
-    color: white;
+    color: #40b7d3;
 }
 
 a:hover {
@@ -24,7 +24,7 @@ a:hover {
 }
 
 .loja_do_hardware_h1 {
-    color: white;
+    color: #40b7d3;
     width: 150px;
     text-align: left;
     margin-bottom: 0;
@@ -36,4 +36,9 @@ a:hover {
     .loja_do_hardware_h1 {
         font-size: 15px;
     }
+}
+
+.header_logo {
+    width: 200px;
+    height: auto;
 }

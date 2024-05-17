@@ -33,48 +33,54 @@ export const Product = () => {
     return (
         <div>
             <Header />
-            <h1>Adicionar Produto</h1>
-            <div className='edit_product_div'>
-                <div className="input_group">
-                    <label>Nome: </label>
-                    <input
-                        type="text"
-                        name="nome"
-                        value={nome.toUpperCase()}
-                        onChange={e => setNome(e.target.value)}
-                    />
+            <h1 className='add_product_h1'>
+                Adicionar Produto
+            </h1>
+            <div className='centered_container'>
+                <div className='edit_product_div'>
+                    <div className="input_group">
+                        <input
+                            type="text"
+                            name="nome"
+                            placeholder='Nome do Produto'
+                            value={nome.toUpperCase()}
+                            onChange={e => setNome(e.target.value)}
+                        />
+                    </div>
+                    <div className="input_group">
+                        <input
+                            type="text"
+                            name="descricao"
+                            placeholder='Descrição'
+                            value={descricao.toUpperCase()}
+                            onChange={e => setDescricao(e.target.value)}
+                        />
+                    </div>
+                    <div className="input_group">
+                        <input
+                            type="text"
+                            name="preco"
+                            placeholder='Preço'
+                            value={preco}
+                            onChange={e => setPreco(e.target.value)}
+                        />
+                    </div>
+                    <div className="input_group">
+                        <input
+                            type="text"
+                            name="imagem"
+                            placeholder='URL da Imagem'
+                            value={imagem_url}
+                            onChange={e => setImagem(e.target.value)}
+                        />
+                    </div>
+                    <div className='product_buttons'>
+                        <button className='product_salvar' onClick={saveData}>Salvar</button>
+                        <Link to="/">
+                            <button className='product_cancelar'>Cancelar</button>
+                        </Link>
+                    </div>
                 </div>
-                <div className="input_group">
-                    <label>Descrição: </label>
-                    <input
-                        type="text"
-                        name="descricao"
-                        value={descricao.toUpperCase()}
-                        onChange={e => setDescricao(e.target.value)}
-                    />
-                </div>
-                <div className="input_group">
-                    <label>Preço: </label>
-                    <input
-                        type="text"
-                        name="preco"
-                        value={preco}
-                        onChange={e => setPreco(e.target.value)}
-                    />
-                </div>
-                <div className="input_group">
-                    <label>Imagem: </label>
-                    <input
-                        type="text"
-                        name="imagem"
-                        value={imagem_url}
-                        onChange={e => setImagem(e.target.value)}
-                    />
-                </div>
-                <button onClick={saveData}>Salvar</button>
-                <Link to="/">
-                    <button>Cancelar</button>
-                </Link>
             </div>
         </div>
     )

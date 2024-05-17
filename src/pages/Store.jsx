@@ -110,7 +110,7 @@ export const Store = () => {
             {localStorage.getItem('isAdmin') === '1' &&
                 <div className='add_product_div'>
                     <Link to="/product">
-                        <p><BsPlusCircle /> Adicionar produto</p>
+                        <p className='addProduct_button'><BsPlusCircle /> Adicionar produto</p>
                     </Link>
                 </div>
             }

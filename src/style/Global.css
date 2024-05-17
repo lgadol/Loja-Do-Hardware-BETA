@@ -78,6 +78,10 @@
     height: 80vh;
 }
 
+.addProduct_button {
+    color: white !important;
+}
+
 /* Página Login */
 
 
@@ -93,10 +97,20 @@
 
 /* Página Product */
 
-.edit_product_div {
+.add_product_h1 {
+    background-color: rgb(75, 75, 75);
+    color: #40b7d3;
+}
+
+.centered_container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 25vh;
+}
+
+.edit_product_div {
+    display: grid;
 }
 
 .input_group {
@@ -107,8 +121,27 @@
 
 .input_group input {
     margin-left: 10px;
-    width: 300px;
-    /* Ajuste este valor conforme necessário */
+    height: 30px;
+    width: 50vw;
+}
+
+
+.product_salvar, .product_cancelar {
+    width: 25vw;
+    justify-content: center;
+    border: none;
+    height: 50px;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.product_salvar {
+    background-color: green;
+}
+
+.product_cancelar {
+    background-color: red;
 }
 
 /* Página Payment */
