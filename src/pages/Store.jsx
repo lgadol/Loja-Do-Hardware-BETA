@@ -130,7 +130,7 @@ export const Store = () => {
                                     onChange={(event) => handleQuantityChange(e.id, event.target.value)}
                                 />
                                 <button className='product_button' onClick={() => handleClick(e)}>
-                                    <BsFillCartPlusFill color='green' />
+                                    <BsFillCartPlusFill color='#40b7d3' />
                                 </button>
                             </div>
                         </div>

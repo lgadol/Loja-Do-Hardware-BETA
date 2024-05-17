@@ -60,7 +60,7 @@
 
 .cartQuanty_input {
     width: 30px;
-    border-color: green;
+    border-color: #40b7d3;
     border-radius: 5px;
 }
 
@@ -126,7 +126,8 @@
 }
 
 
-.product_salvar, .product_cancelar {
+.product_salvar,
+.product_cancelar {
     width: 25vw;
     justify-content: center;
     border: none;
