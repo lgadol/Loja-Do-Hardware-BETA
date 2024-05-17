@@ -1,0 +1,39 @@
+.header_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background-color: rgb(37, 37, 37);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.header_p,
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.exit_p {
+    color: red;
+    cursor: pointer;
+}
+
+.loja_do_hardware_h1 {
+    color: white;
+    width: 150px;
+    text-align: left;
+    margin-bottom: 0;
+    margin-left: 0;
+    font-size: 25px;
+}
+
+@media (max-width: 539px) {
+    .loja_do_hardware_h1 {
+        font-size: 15px;
+    }
+}
