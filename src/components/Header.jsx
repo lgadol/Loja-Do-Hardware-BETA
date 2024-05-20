@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../style/Header.css'
+import '../style/Header.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FaCrown, FaUser, FaSignInAlt, FaShoppingCart, FaStore, FaSignOutAlt } from 'react-icons/fa';
-import logo from '../img/loja-do-hardware-logo.png'
+import logo from '../img/loja-do-hardware-2.png';
 
 export const Header = () => {
     const [userName, setUserName] = useState(localStorage.getItem('userName'));
@@ -21,7 +21,7 @@ export const Header = () => {
 
     return (
         <div className='header_div'>
-            <img src={logo} className='header_logo' />
+            <Link to="/"> <img src={logo} className='header_logo' /> </Link>
             <Link to="/"><FaStore /> Loja</Link>
             <Link to="/cart"><FaShoppingCart /> Carrinho</Link>
             {userName ? (

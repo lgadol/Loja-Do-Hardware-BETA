@@ -2,8 +2,9 @@ import React from 'react';
 
 
 /* Página Profile */
-export const EstadosBrasileiros = ({ value, onChange }) => (
+export const EstadosBrasileiros = ({ value, onChange, className }) => (
     <select
+        className='estadosBR_profile'
         name="estado"
         value={value}
         onChange={onChange}

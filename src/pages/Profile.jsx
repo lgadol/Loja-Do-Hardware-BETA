@@ -266,13 +266,15 @@ export const Profile = () => {
                                 value={editedUser.cidade.toUpperCase()}
                                 onChange={handleInputChange}
                             />
-                            <EstadosBrasileiros
+                            < EstadosBrasileiros
+                                className="estadosBR_profile"
                                 value={editedUser.estado}
                                 onChange={handleInputChange}
                             />
                             <br />
                             <h3>Confirme com sua senha:</h3>
                             <input
+                                className='password_profile_input'
                                 type="password"
                                 name="password"
                                 value={password}
@@ -282,26 +284,30 @@ export const Profile = () => {
                     ) : (
                         <div className='profile_information_div'>
                             <h2>Informações do Perfil</h2>
-                            <p>{user.usuario}</p>
-                            <p>{user.nome}</p>
-                            <p>{user.email}</p>
-                            <p>{user.cpf}</p>
-                            <p>{user.rua}</p>
-                            <p>{user.bairro}</p>
-                            <p>{user.numero}</p>
-                            <p>{user.cep}</p>
-                            <p>{user.cidade}</p>
-                            <p>{user.estado}</p>
+                            <div className='profile_information_content'>
+                                <p>{user.usuario}</p>
+                                <p>{user.nome}</p>
+                                <p>{user.email}</p>
+                                <p>{user.cpf}</p>
+                                <p>{user.rua}</p>
+                                <p>{user.bairro}</p>
+                                <p>{user.numero}</p>
+                                <p>{user.cep}</p>
+                                <p>{user.cidade}</p>
+                                <p>{user.estado}</p>
+                            </div>
                         </div>
                     )}
-                    <button onClick={() => setIsEditing(!isEditing)}>
-                        {isEditing ? 'Cancelar' : 'Editar Perfil'}
-                    </button>
-                    {isEditing && (
-                        <button onClick={handleSave} disabled={JSON.stringify(user) === JSON.stringify(editedUser) || password === ''}>
-                            Salvar
+                    <div className='profile_buttons_div'>
+                        <button className={isEditing ? 'cancel_button_profile' : 'edit_button_profile'} onClick={() => setIsEditing(!isEditing)}>
+                            {isEditing ? 'Cancelar' : 'Editar Perfil'}
                         </button>
-                    )}
+                        {isEditing && (
+                            <button className='save_button_profile' onClick={handleSave} disabled={JSON.stringify(user) === JSON.stringify(editedUser) || password === ''}>
+                                Salvar
+                            </button>
+                        )}
+                    </div>
                 </div>
             )}
         </div>

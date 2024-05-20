@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle } from 'react-icons/bs';
+import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle, BsPencilSquare } from 'react-icons/bs';
 import { getItem, setItem } from '../services/LocalStorageFuncs';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -118,7 +118,17 @@ export const Store = () => {
                 {
                     data.map((e) => (
                         <div key={e.id} className='product_div'>
-                            <p className='trash_button'>{localStorage.getItem('isAdmin') === '1' && <BsTrash3Fill color='red' onClick={() => handleDelete(e)} />}</p>
+                            <div className='alter_buttons'>
+                                <button className='trash_button'>
+                                    {localStorage.getItem('isAdmin') === '1' && <BsTrash3Fill
+                                        onClick={() => handleDelete(e)} />}
+                                </button>
+                                <Link to='/editProduct'>
+                                    <button className='edit_button'>
+                                        {localStorage.getItem('isAdmin') === '1' && <BsPencilSquare />}
+                                    </button>
+                                </Link>
+                            </div>
                             <h4>{e.nome}</h4>
                             <img className="img_product" src={e.imagem_url} alt="" />
                             <h3>{parseFloat(e.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
@@ -130,7 +140,7 @@ export const Store = () => {
                                     onChange={(event) => handleQuantityChange(e.id, event.target.value)}
                                 />
                                 <button className='product_button' onClick={() => handleClick(e)}>
-                                    <BsFillCartPlusFill color='#40b7d3' />
+                                    <BsFillCartPlusFill />
                                 </button>
                             </div>
                         </div>

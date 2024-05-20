@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import '../style/Global.css';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const Product = () => {
     const [nome, setNome] = useState('');
@@ -9,23 +10,64 @@ export const Product = () => {
     const [preco, setPreco] = useState('');
     const [imagem_url, setImagem] = useState('');
 
+    const handleNomeChange = (e) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z\s]*$/.test(value)) {
+            setNome(value);
+        } else {
+            toast.error('O nome do produto deve conter apenas letras.', {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
+        }
+    }
+
+    const handlePrecoChange = (e) => {
+        const value = e.target.value;
+        if (/^\d+(\.\d{1,2})?$/.test(value) || /^\d*$/.test(value)) {
+            setPreco(value);
+        } else {
+            toast.error('O preço deve conter apenas números.', {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
+        }
+    }
+
     const saveData = async () => {
+        if (!nome || !descricao || !preco || !imagem_url) {
+            toast.error('Por favor, preencha todos os campos.', {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
+            return;
+        }
+
         const response = await fetch(`http://localhost:4000/addProduct`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                nome,
-                descricao,
+                ativo: 1,
+                nome: nome.toUpperCase(),
+                descricao: descricao.toUpperCase(),
                 preco,
                 imagem_url
             })
         });
 
         if (response.ok) {
+            toast.success('Dados salvos com sucesso.', {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
             console.log('Dados salvos com sucesso');
         } else {
+            toast.error('Erro ao salvar os dados.', {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
             console.error('Erro ao salvar os dados: ', await response.json());
         }
     }
@@ -44,7 +86,7 @@ export const Product = () => {
                             name="nome"
                             placeholder='Nome do Produto'
                             value={nome.toUpperCase()}
-                            onChange={e => setNome(e.target.value)}
+                            onChange={handleNomeChange}
                         />
                     </div>
                     <div className="input_group">
@@ -62,7 +104,7 @@ export const Product = () => {
                             name="preco"
                             placeholder='Preço'
                             value={preco}
-                            onChange={e => setPreco(e.target.value)}
+                            onChange={handlePrecoChange}
                         />
                     </div>
                     <div className="input_group">

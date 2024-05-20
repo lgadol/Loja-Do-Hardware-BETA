@@ -1,4 +1,7 @@
 /* Página Store e Cart */
+body {
+    background-color: rgb(212, 212, 212);
+}
 
 .product_area {
     display: flex;
@@ -8,6 +11,7 @@
     align-items: center;
     margin-bottom: 70px;
     margin-top: 50px;
+    background-color: rgb(212, 212, 212);
 }
 
 .product_div {
@@ -19,6 +23,8 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    box-shadow: 0px 0px 10px black;
+    background-color: white !important;
 }
 
 .add_product_div {
@@ -50,12 +56,39 @@
     background: transparent;
     border: none;
     cursor: pointer;
+    color: #40b7d3;
+}
+
+.product_button:hover {
+    color: #1f5864;
 }
 
 .trash_button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
     cursor: pointer;
     margin-top: 0;
     margin-bottom: 0;
+    color: red;
+}
+
+.trash_button:hover {
+    color: darkred !important;
+}
+
+.edit_button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: goldenrod;
+}
+
+.edit_button:hover {
+    color: brown;
 }
 
 .cartQuanty_input {
@@ -82,12 +115,25 @@
     color: white !important;
 }
 
+.add_product_div:hover {
+    background-color: darkgreen;
+}
+
 /* Página Login */
 
 
 /* Página Profile */
 
-.profile_information_div {}
+.profile_information_div h2 {
+    color: #40b7d3;
+    background-color: rgb(37, 37, 37);
+}
+
+.profile_editing_div h2 {
+    color: #40b7d3;
+    background-color: rgb(37, 37, 37);
+    width: 100%;
+}
 
 .profile_editing_div {
     display: flex;
@@ -95,10 +141,91 @@
     align-items: center;
 }
 
+.profile_buttons_div button {
+    border: solid 1px #40b7d3;
+    color: #40b7d3;
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.edit_button_profile:hover {
+    color: green;
+    border: solid 1px green;
+}
+
+.cancel_button_profile:hover {
+    color: red;
+    border: solid 1px red;
+}
+
+.save_button_profile {
+    margin-bottom: 65px !important;
+}
+
+.save_button_profile:hover {
+    color: green;
+    border: solid 1px green;
+}
+
+.save_button_profile:disabled {
+    cursor: default;
+    color: #808080;
+    border: solid 1px #808080;
+}
+
+.profile_information_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_information_div h2 {
+    width: 100%;
+}
+
+.profile_information_div p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 35vw;
+    height: 45px;
+    margin: 0;
+    border: solid 1px #808080;
+}
+
+.profile_information_content {
+    box-shadow: 0px 0px 10px black;
+}
+
+.profile_editing_div input,
+.estadosBR_profile {
+    background-color: rgb(37, 37, 37);
+    width: 30vw;
+    height: 20px;
+    color: white;
+    border: solid 1px #40b7d3;
+    margin: 1px;
+}
+
+.password_profile_input {
+    background-color: rgb(37, 37, 37) !important;
+}
+
+.estadosBR_profile {
+    width: 30.5vw;
+}
+
 /* Página Product */
 
-.add_product_h1 {
-    background-color: rgb(75, 75, 75);
+.add_product_h1,
+.input_group input {
+    background-color: rgb(37, 37, 37);
     color: #40b7d3;
 }
 
@@ -120,11 +247,26 @@
 }
 
 .input_group input {
-    margin-left: 10px;
     height: 30px;
     width: 50vw;
+    background-color: rgb(37, 37, 37);
+    border: solid 1px #40b7d3;
 }
 
+.input_group input::-webkit-input-placeholder {
+    /* Chrome, Edge, Safari */
+    color: #40b7d3;
+}
+
+.input_group input::-moz-placeholder {
+    /* Firefox */
+    color: #40b7d3;
+}
+
+.input_group input:-ms-input-placeholder {
+    /* Internet Explorer */
+    color: #40b7d3;
+}
 
 .product_salvar,
 .product_cancelar {
@@ -135,14 +277,19 @@
     font-size: 15px;
     color: white;
     cursor: pointer;
+    border: solid 1px #40b7d3;
+    background-color: rgb(37, 37, 37);
+    color: #40b7d3;
 }
 
-.product_salvar {
-    background-color: green;
+.product_salvar:hover {
+    color: green;
+    border: solid 1px green;
 }
 
-.product_cancelar {
-    background-color: red;
+.product_cancelar:hover {
+    color: red;
+    border: solid 1px red;
 }
 
 /* Página Payment */

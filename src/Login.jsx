@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Header } from './components/Header';
 import './style/Global.css'
 
 export const Login = () => {
@@ -48,6 +49,7 @@ export const Login = () => {
 
     return (
         <div>
+            <Header />
             <p>Usuário</p>
             <input
                 type='text'
