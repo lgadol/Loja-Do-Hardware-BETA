@@ -3,15 +3,16 @@
     align-items: center;
     justify-content: center;
     gap: 50px;
-    background-color: rgb(37, 37, 37);
+    background-color: #525252;
     padding: 20px;
     margin-bottom: 10px;
+    border-bottom: 3px solid black;
 }
 
 .header_p,
 a {
     text-decoration: none;
-    color: #40b7d3;
+    color: black;
 }
 
 a:hover {
