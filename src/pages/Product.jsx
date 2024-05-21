@@ -49,7 +49,7 @@ export const Product = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                ativo: 1,
+                ativo: '1',
                 nome: nome.toUpperCase(),
                 descricao: descricao.toUpperCase(),
                 preco,
@@ -57,18 +57,20 @@ export const Product = () => {
             })
         });
 
+        const responseData = await response.json();
+
         if (response.ok) {
-            toast.success('Dados salvos com sucesso.', {
+            toast.success(responseData.message, {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
             console.log('Dados salvos com sucesso');
         } else {
-            toast.error('Erro ao salvar os dados.', {
+            toast.error(responseData.message, {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
-            console.error('Erro ao salvar os dados: ', await response.json());
+            console.error('Erro ao salvar os dados: ', responseData);
         }
     }
 
