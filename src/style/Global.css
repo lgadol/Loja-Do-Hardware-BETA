@@ -136,6 +136,48 @@ body {
 }
 
 /* Página Login */
+.login_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_div h2 {
+    margin-top: 70px;
+    background-color: rgb(37, 37, 37);
+    color: #40b7d3;
+    width: 100%;
+}
+
+.login_enter_button,
+.login_register_button {
+    background-color: rgb(37, 37, 37);
+    color: #40b7d3;
+    border: solid 1px #40b7d3;
+    width: 90px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 230px;
+    cursor: pointer;
+}
+
+.login_enter_button:hover {
+    color: green;
+    border: solid 1px green;
+}
+
+
+.login_register_button:hover {
+    color: goldenrod;
+    border: solid 1px goldenrod;
+}
+
+.input_login_div input {
+    background-color: rgb(37, 37, 37);
+    border: solid 1px #40b7d3;
+    color: #40b7d3;
+}
 
 
 /* Página Profile */

@@ -46,7 +46,7 @@ export const Payment = (props) => {
                     <h2>Sua Compra foi concluída com sucesso!!</h2>
                     <span><AiFillCheckCircle /></span>
                     <h4>{`Comprador: ${user.nome}`}</h4>
-                    <h4>{`ID de Compra: ${gerarIdCompra()}`}</h4>
+                    <h4>{`ID de Compra: ${gerarIdCompra(user)}`}</h4>
                     <h4>{`E-mail: ${user.email}`}</h4>
                     <h4>{`CPF: ${user.cpf}`}</h4>
                     <h4>{`Rua: ${user.rua}`}</h4>
