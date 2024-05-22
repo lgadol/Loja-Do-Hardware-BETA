@@ -46,6 +46,37 @@ body {
     text-decoration: none;
 }
 
+.search_bar_store {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: -35px;
+}
+
+.search_bar_store i {
+    color: #40b7d3;
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.search_bar_store input {
+    width: 170px;
+    height: 25px;
+    background-color: rgb(37, 37, 37);
+    border-radius: 20px;
+    border: none;
+    padding: 2px 10px;
+    box-shadow: 0px 0px 10px #40b7d3;
+    color: #40b7d3;
+}
+
+.search_bar_store input::-webkit-input-placeholder {
+    /* Chrome, Edge, Safari */
+    color: #40b7d3;
+}
+
 .img_product {
     width: 100px;
     height: 100px;
@@ -166,7 +197,6 @@ body {
     color: green;
     border: solid 1px green;
 }
-
 
 .login_register_button:hover {
     color: goldenrod;

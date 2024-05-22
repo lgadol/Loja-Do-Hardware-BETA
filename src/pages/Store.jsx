@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle, BsPencilSquare } from 'react-icons/bs';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { getItem, setItem } from '../services/LocalStorageFuncs';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -114,6 +115,15 @@ export const Store = () => {
                     </Link>
                 </div>
             }
+
+            <div className='search_bar_store'>
+                <i class="fa fa-search" />
+                <input
+                    type='text'
+                    placeholder='Pesquise...'
+                />
+            </div>
+
             <div className='product_area'>
                 {
                     data.map((e) => (
