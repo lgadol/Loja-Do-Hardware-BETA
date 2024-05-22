@@ -12,15 +12,15 @@ export const Product = () => {
 
     const handleNomeChange = (e) => {
         const value = e.target.value;
-        if (/^[a-zA-Z\s]*$/.test(value)) {
+        if (/^[a-zA-Z0-9\s]*$/.test(value)) { // Aceita letras e números
             setNome(value);
         } else {
-            toast.error('O nome do produto deve conter apenas letras.', {
+            toast.error('O nome do produto deve conter apenas letras e números.', {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
         }
-    }
+    }    
 
     const handlePrecoChange = (e) => {
         const value = e.target.value;

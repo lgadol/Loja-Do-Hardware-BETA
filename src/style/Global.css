@@ -38,6 +38,7 @@ body {
     display: flex;
     border-radius: 20px;
     position: fixed;
+    margin-top: 5px;
     left: 0;
 }
 
