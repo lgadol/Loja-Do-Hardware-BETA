@@ -88,12 +88,12 @@ export const Cart = (props) => {
                                 </div>
                             ))
                         }
-                        <button
-                            onClick={handleClick}
-                        >
-                            Comprar
-                        </button>
                     </div>
+                    <button className='comprar_button_cart'
+                        onClick={handleClick}
+                    >
+                        Comprar
+                    </button>
                 </div>
             )}
         </div>

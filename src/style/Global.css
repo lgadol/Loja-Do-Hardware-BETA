@@ -120,6 +120,21 @@ body {
     background-color: darkgreen;
 }
 
+.comprar_button_cart {
+    margin-bottom: 70px;
+    border: solid 1px #40b7d3;
+    background-color: rgb(37, 37, 37);
+    color: #40b7d3;
+    width: 280px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.comprar_button_cart:hover {
+    border: solid 1px green;
+    color: green;
+}
+
 /* Página Login */
 
 
@@ -256,17 +271,17 @@ body {
 
 .input_group input::-webkit-input-placeholder {
     /* Chrome, Edge, Safari */
-    color: #40b7d3;
+    color: #296b7a;
 }
 
 .input_group input::-moz-placeholder {
     /* Firefox */
-    color: #40b7d3;
+    color: #296b7a;
 }
 
 .input_group input:-ms-input-placeholder {
     /* Internet Explorer */
-    color: #40b7d3;
+    color: #296b7a;
 }
 
 .product_salvar,
@@ -295,7 +310,14 @@ body {
 
 /* Página Payment */
 
-.payment_div {}
+.payment_div {
+    margin-bottom: 70px !important;
+    margin-top: 70px !important;
+    border: solid 3px green;
+    background-color: rgba(0, 128, 0, 0.2);
+    width: 500px;
+    margin: 0 auto;
+}
 
 .payment_div span {
     font-size: 80px;
