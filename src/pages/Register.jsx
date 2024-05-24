@@ -34,7 +34,7 @@ export const Register = () => {
             body: JSON.stringify({
                 admin: '0',
                 ativo: '1',
-                usuario: usuario.toUpperCase(),
+                usuario,
                 nome: nome.toUpperCase(),
                 email,
                 cpf,
