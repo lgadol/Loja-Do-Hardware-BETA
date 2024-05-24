@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Header } from './components/Header';
+import bcrypt from 'bcryptjs';
 import './style/Global.css'
 
 export const Login = () => {
@@ -9,7 +10,6 @@ export const Login = () => {
     const [pass, setPass] = useState('');
 
     const history = useHistory();
-
     const cond = (name.length > 3 && pass.length > 4);
 
     useEffect(() => {
@@ -26,10 +26,12 @@ export const Login = () => {
         fetchApi();
     }, [])
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         const user = data.find(user => user.usuario === name);
         if (user) {
-            if (user.senha === pass) {
+            // Verificar a senha usando bcrypt
+            const isPasswordCorrect = await bcrypt.compare(pass, user.senha);
+            if (isPasswordCorrect) {
                 if (user.ativo === 1) {
                     localStorage.setItem('userToken', 'loggedIn');
                     localStorage.setItem('userId', user.id);
