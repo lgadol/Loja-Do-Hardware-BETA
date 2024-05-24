@@ -12,7 +12,7 @@ export const Store = () => {
     const [cart, setCart] = useState(getItem('carrinhoYt') || []);
     const [quantities, setQuantities] = useState({});
 
-    const fetchApi = async () => {
+    const fetchStore = async () => {
         try {
             const url = 'http://localhost:4000/';
             const response = await fetch(url);
@@ -24,7 +24,7 @@ export const Store = () => {
     }
 
     useEffect(() => {
-        fetchApi();
+        fetchStore();
     }, [])
 
     const handleQuantityChange = (id, quantity) => {
@@ -95,7 +95,7 @@ export const Store = () => {
                     position: "bottom-right",
                     autoClose: 2000
                 });
-                fetchApi();
+                fetchStore();
             } else {
                 toast.error("Erro ao excluir o produto.", {
                     position: "bottom-right",

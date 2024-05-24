@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const { createConnection } = require('mysql2');
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 app.use(cors());
@@ -108,20 +109,20 @@ app.post('/checkPassword/:id', (req, res) => {
             const user = results[0];
 
             // Senha em texto simples (o que não é recomendado), feito assim:
-            if (user.senha === password) {
-                res.json({ message: 'Senha correta' });
-            } else {
-                res.status(401).json({ message: 'Senha incorreta' });
-            }
+            // if (user.senha === password) {
+            //    res.json({ message: 'Senha correta' });
+            // } else {
+            //    res.status(401).json({ message: 'Senha incorreta' });
+            // }
 
             // Senha usando bcrypt, é feito assim:
-            // bcrypt.compare(password, user.senha, function(err, result) {
-            //     if (result == true) {
-            //         res.json({ message: 'Senha correta' });
-            //     } else {
-            //         res.status(401).json({ message: 'Senha incorreta' });
-            //     }
-            // });
+            bcrypt.compare(password, user.senha, function (err, result) {
+                if (result === true) {
+                    res.json({ message: 'Senha correta' });
+                } else {
+                    res.status(401).json({ message: 'Senha incorreta' });
+                }
+            });
         } else {
             res.status(404).json({ message: 'Usuário não encontrado' });
         }
@@ -211,8 +212,6 @@ app.post('/addProduct', (req, res) => {
     });
 });
 
-
-
 // Desativar um produto
 app.put('/product/:id', (req, res) => {
     const { id } = req.params;
@@ -225,6 +224,52 @@ app.put('/product/:id', (req, res) => {
     });
 });
 
+// Adicionar um novo usuário
+app.post('/registerUser', (req, res) => {
+    const { admin, ativo, usuario, nome, email, cpf, senha, rua, bairro, numero, cep, cidade, estado } = req.body;
+
+    // Verificar se o usuário já existe
+    const queryCheckUser = 'SELECT * FROM usuarios_hardware WHERE usuario = ?';
+    lojaHardwareCONN.query(queryCheckUser, [usuario], (error, results) => {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.status(400).json({ message: 'O nome de usuário já existe.' });
+            return;
+        }
+
+        // Verificar se o email já existe
+        const queryCheckEmail = 'SELECT * FROM usuarios_hardware WHERE email = ?';
+        lojaHardwareCONN.query(queryCheckEmail, [email], (error, results) => {
+            if (error) throw error;
+            if (results.length > 0) {
+                res.status(400).json({ message: 'O email já está em uso.' });
+                return;
+            }
+
+            // Verificar se o cpf já existe
+            const queryCheckCpf = 'SELECT * FROM usuarios_hardware WHERE cpf = ?';
+            lojaHardwareCONN.query(queryCheckCpf, [cpf], (error, results) => {
+                if (error) throw error;
+                if (results.length > 0) {
+                    res.status(400).json({ message: 'O CPF já está registrado.' });
+                    return;
+                }
+
+                // Criptografe a senha antes de inseri-la no banco de dados
+                const saltRounds = 10;
+                bcrypt.hash(senha, saltRounds, (error, hashedPassword) => {
+                    if (error) throw error;
+
+                    const queryInsert = 'INSERT INTO usuarios_hardware SET admin = ?, ativo = ?, usuario = ?, nome = ?, email = ?, cpf = ?, senha = ?, rua = ?, bairro = ?, numero = ?, cep = ?, cidade = ?, estado = ?';
+                    lojaHardwareCONN.query(queryInsert, [admin, ativo, usuario, nome, email, cpf, hashedPassword, rua, bairro, numero, cep, cidade, estado], (error, results) => {
+                        if (error) throw error;
+                        res.json({ message: 'Usuário adicionado com sucesso' });
+                    });
+                });
+            });
+        });
+    });
+});
 
 app.listen(4000, () => {
     console.log('API rodando na porta 4000');

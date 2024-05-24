@@ -9,6 +9,7 @@ import { Profile } from "./pages/Profile";
 import { Product } from "./pages/Product";
 import { Payment } from "./pages/Payment";
 import { Login } from "./Login";
+import { Register } from "./pages/Register";
 
 export const Content = () => {
     return (
@@ -19,6 +20,7 @@ export const Content = () => {
             <ProtectedRoute exact path='/product' component={Product} />
             <ProtectedRoute exact path='/payment/:price' component={Payment} />
             <LoginRoute exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
         </Switch>
     )
 }

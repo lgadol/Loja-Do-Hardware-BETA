@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 
 /* Página Profile */
@@ -39,3 +40,230 @@ export const EstadosBrasileiros = ({ value, onChange, className }) => (
         <option value="TO">TO</option>
     </select>
 );
+
+export const handleInputChange = (event, setEditedUser, editedUser) => {
+    const { name, value } = event.target;
+    let errorMessage = '';
+
+    switch (name) {
+        case 'usuario':
+            if (value.length > 20 || /[^a-zA-Z0-9]/.test(value)) {
+                errorMessage = 'O usuário não pode ter mais de 20 caracteres, espaços ou conter caracteres especiais';
+            }
+            break;
+        case 'nome':
+            if (value.length > 50 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'O nome não pode ter mais de 50 caracteres ou conter caracteres especiais';
+            }
+            break;
+        case 'email':
+            if (value.length > 50) {
+                errorMessage = 'O email não pode ter mais de 50 caracteres';
+            }
+            break;
+        case 'cpf':
+            if (value.length > 11 || /\D/.test(value)) {
+                errorMessage = 'O CPF não pode ter mais de 11 caracteres e só pode conter números';
+            }
+            break;
+        case 'rua':
+            if (value.length > 150 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'A rua não pode ter mais de 150 caracteres e só pode conter letras';
+            }
+            break;
+        case 'bairro':
+            if (value.length > 50 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'O bairro não pode ter mais de 50 caracteres ou conter caracteres especiais';
+            }
+            break;
+        case 'numero':
+            if (value.length > 20 || /\D/.test(value)) {
+                errorMessage = 'O número não pode ter mais de 20 caracteres e só pode conter números';
+            }
+            break;
+        case 'cep':
+            if (value.length > 8 || /\D/.test(value)) {
+                errorMessage = 'O CEP não pode ter mais de 8 caracteres e só pode conter números';
+            }
+            break;
+        case 'cidade':
+            if (value.length > 150 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'A cidade não pode ter mais de 150 caracteres e só pode conter letras';
+            }
+            break;
+        case 'senha':
+            if (value.length > 64) {
+                errorMessage = 'A senha não pode ter mais de 64 caracteres';
+            }
+            break;
+        default:
+            break;
+    }
+
+    if (errorMessage) {
+        toast.error(errorMessage, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+    } else {
+        setEditedUser({
+            ...editedUser,
+            [name]: value,
+        });
+    }
+};
+
+export const checkUser = async (user, editedUser) => {
+    const response = await fetch(`http://localhost:4000/checkUser/${user.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usuario: editedUser.usuario }),
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+        return false;
+    }
+
+    return true;
+};
+
+export const checkEmail = async (user, editedUser) => {
+    const response = await fetch(`http://localhost:4000/checkEmail/${user.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: editedUser.email }),
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+        return false;
+    }
+
+    return true;
+};
+
+export const checkCpf = async (user, editedUser) => {
+    const response = await fetch(`http://localhost:4000/checkCpf/${user.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cpf: editedUser.cpf }),
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+        return false;
+    }
+
+    return true;
+};
+
+export const checkPassword = async (user, editedUser) => {
+    const response = await fetch(`http://localhost:4000/checkPassword/${user.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: editedUser.senha }),
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+        return false;
+    }
+
+    return true;
+};
+
+/* Página Register */
+
+export const handleRegisterInput = (event, setState, fieldName) => {
+    const { value } = event.target;
+    let errorMessage = '';
+
+    switch (fieldName) {
+        case 'usuario':
+            if (value.length > 20 || /[^a-zA-Z0-9]/.test(value)) {
+                errorMessage = 'O usuário não pode ter mais de 20 caracteres, espaços ou conter caracteres especiais';
+            }
+            break;
+        case 'nome':
+            if (value.length > 50 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'O nome não pode ter mais de 50 caracteres ou conter caracteres especiais';
+            }
+            break;
+        case 'email':
+            if (value.length > 50) {
+                errorMessage = 'O email não pode ter mais de 50 caracteres';
+            }
+            break;
+        case 'cpf':
+            if (value.length > 11 || /\D/.test(value)) {
+                errorMessage = 'O CPF não pode ter mais de 11 caracteres e só pode conter números';
+            }
+            break;
+        case 'rua':
+            if (value.length > 150 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'A rua não pode ter mais de 150 caracteres e só pode conter letras';
+            }
+            break;
+        case 'bairro':
+            if (value.length > 50 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'O bairro não pode ter mais de 50 caracteres ou conter caracteres especiais';
+            }
+            break;
+        case 'numero':
+            if (value.length > 20 || /\D/.test(value)) {
+                errorMessage = 'O número não pode ter mais de 20 caracteres e só pode conter números';
+            }
+            break;
+        case 'cep':
+            if (value.length > 8 || /\D/.test(value)) {
+                errorMessage = 'O CEP não pode ter mais de 8 caracteres e só pode conter números';
+            }
+            break;
+        case 'cidade':
+            if (value.length > 150 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'A cidade não pode ter mais de 150 caracteres e só pode conter letras';
+            }
+            break;
+        case 'senha':
+            if (value.length > 64) {
+                errorMessage = 'A senha não pode ter mais de 64 caracteres';
+            }
+            break;
+        default:
+            break;
+    }
+
+    if (errorMessage) {
+        toast.error(errorMessage, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+    } else {
+        setState(value);
+    }
+};

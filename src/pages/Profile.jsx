@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Header } from '../components/Header'
 import { toast } from 'react-toastify';
 import '../style/Global.css'
-import { EstadosBrasileiros } from '../services/Vars';
+import { EstadosBrasileiros, handleInputChange, checkUser, checkEmail, checkCpf, checkPassword } from '../services/Vars';
 
 export const Profile = () => {
     const [user, setUser] = useState(null);
@@ -27,73 +27,6 @@ export const Profile = () => {
         fetchUser();
     }, [isEditing]);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        let errorMessage = '';
-
-        switch (name) {
-            case 'usuario':
-                if (value.length > 20 || /[^a-zA-Z0-9]/.test(value)) {
-                    errorMessage = 'O usuário não pode ter mais de 20 caracteres ou conter caracteres especiais';
-                }
-                break;
-            case 'nome':
-                if (value.length > 50 || /[^a-zA-Z\s]/.test(value)) {
-                    errorMessage = 'O nome não pode ter mais de 50 caracteres ou conter caracteres especiais';
-                }
-                break;
-            case 'email':
-                if (value.length > 50) {
-                    errorMessage = 'O email não pode ter mais de 50 caracteres';
-                }
-                break;
-            case 'cpf':
-                if (value.length > 11 || /\D/.test(value)) {
-                    errorMessage = 'O CPF não pode ter mais de 11 caracteres e só pode conter números';
-                }
-                break;
-            case 'rua':
-                if (value.length > 150 || /[^a-zA-Z\s]/.test(value)) {
-                    errorMessage = 'A rua não pode ter mais de 150 caracteres e só pode conter letras';
-                }
-                break;
-            case 'bairro':
-                if (value.length > 50 || /[^a-zA-Z\s]/.test(value)) {
-                    errorMessage = 'O bairro não pode ter mais de 50 caracteres ou conter caracteres especiais';
-                }
-                break;
-            case 'numero':
-                if (value.length > 20 || /\D/.test(value)) {
-                    errorMessage = 'O número não pode ter mais de 20 caracteres e só pode conter números';
-                }
-                break;
-            case 'cep':
-                if (value.length > 8 || /\D/.test(value)) {
-                    errorMessage = 'O CEP não pode ter mais de 8 caracteres e só pode conter números';
-                }
-                break;
-            case 'cidade':
-                if (value.length > 150 || /[^a-zA-Z\s]/.test(value)) {
-                    errorMessage = 'A cidade não pode ter mais de 150 caracteres e só pode conter letras';
-                }
-                break;
-            default:
-                break;
-        }
-
-        if (errorMessage) {
-            toast.error(errorMessage, {
-                position: "bottom-right",
-                autoClose: 2000
-            });
-        } else {
-            setEditedUser({
-                ...editedUser,
-                [name]: value,
-            });
-        }
-    };
-
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
     };
@@ -101,75 +34,20 @@ export const Profile = () => {
     const handleSave = async () => {
 
         // Verificar se o nome de usuário já existe
-        const userCheckResponse = await fetch(`http://localhost:4000/checkUser/${user.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ usuario: editedUser.usuario }),
-        });
-
-        if (!userCheckResponse.ok) {
-            const { message } = await userCheckResponse.json();
-            toast.error(message, {
-                position: "bottom-right",
-                autoClose: 2000
-            });
-            return;
-        }
+        const isUserValid = await checkUser(user, editedUser);
+        if (!isUserValid) return;
 
         // Verificar se o email já existe
-        const emailCheckResponse = await fetch(`http://localhost:4000/checkEmail/${user.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: editedUser.email }),
-        });
-
-        if (!emailCheckResponse.ok) {
-            const { message } = await emailCheckResponse.json();
-            toast.error(message, {
-                position: "bottom-right",
-                autoClose: 2000
-            });
-            return;
-        }
+        const isEmailValid = await checkEmail(user, editedUser);
+        if (!isEmailValid) return;
 
         // Verificar se o cpf já existe
-        const cpfCheckResponse = await fetch(`http://localhost:4000/checkCpf/${user.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ cpf: editedUser.cpf }),
-        });
-
-        if (!cpfCheckResponse.ok) {
-            const { message } = await cpfCheckResponse.json();
-            toast.error(message, {
-                position: "bottom-right",
-                autoClose: 2000
-            });
-            return;
-        }
+        const isCpfValid = await checkCpf(user, editedUser);
+        if (!isCpfValid) return;
 
         // Verificar se a senha está correta antes de salvar
-        const passwordResponse = await fetch(`http://localhost:4000/checkPassword/${user.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ password }),
-        });
-
-        if (!passwordResponse.ok) {
-            toast.error('Senha incorreta!', {
-                position: "bottom-right",
-                autoClose: 2000
-            });
-            return;
-        }
+        const isPasswordValid = await checkPassword(user, editedUser);
+        if (!isPasswordValid) return;
 
         const response = await fetch(`http://localhost:4000/users/${user.id}`, {
             method: 'PUT',
@@ -216,60 +94,60 @@ export const Profile = () => {
                                 type="text"
                                 name="usuario"
                                 value={editedUser.usuario}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="nome"
                                 value={editedUser.nome.toUpperCase()}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="email"
                                 value={editedUser.email}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="cpf"
                                 value={editedUser.cpf}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="rua"
                                 value={editedUser.rua.toUpperCase()}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="bairro"
                                 value={editedUser.bairro.toUpperCase()}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="numero"
                                 value={editedUser.numero}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="cep"
                                 value={editedUser.cep}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="cidade"
                                 value={editedUser.cidade.toUpperCase()}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             < EstadosBrasileiros
                                 className="estadosBR_profile"
                                 value={editedUser.estado}
-                                onChange={handleInputChange}
+                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
                             />
                             <br />
                             <h3>Confirme com sua senha:</h3>
