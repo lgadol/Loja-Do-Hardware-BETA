@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Header } from '../components/Header';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { handleRegisterInput, EstadosBrasileiros } from '../services/Vars';
 
 export const Register = () => {
@@ -20,6 +21,14 @@ export const Register = () => {
     const handleSave = async () => {
         if (!usuario || !nome || !email || !cpf || !rua || !bairro || !numero || !cep || !cidade || !estado || !senha) {
             toast.error('Por favor, preencha todos os campos.', {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
+            return;
+        }
+
+        if (senha !== confirmPassword) {
+            toast.error('As senhas não correspondem.', {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
@@ -172,25 +181,21 @@ export const Register = () => {
                         type="password"
                         name="confirmSenha"
                         value={confirmPassword}
-                        onChange={(event) => {
-                            if (event.target.value !== senha) {
-                                toast.error('As senhas não correspondem.', {
-                                    autoClose: 2000,
-                                    position: 'bottom-right'
-                                });
-                            }
-                            setConfirmPassword(event.target.value);
-                        }}
+                        onChange={(event) => setConfirmPassword(event.target.value)}
                     />
                 </div>
             </div>
             <div className='profile_buttons_div'>
-                <button className='cancel_button_profile'>
-                    Cancelar
-                </button>
-                <button className='save_button_profile' onClick={handleSave}>
-                    Salvar
-                </button>
+                <Link to='/login'>
+                    <button className='cancel_button_profile'>
+                        Cancelar
+                    </button>
+                </Link>
+                <Link to='/'>
+                    <button className='save_button_profile' onClick={handleSave}>
+                        Salvar
+                    </button>
+                </Link>
             </div>
         </div>
     )
