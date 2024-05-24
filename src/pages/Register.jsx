@@ -191,11 +191,9 @@ export const Register = () => {
                         Cancelar
                     </button>
                 </Link>
-                <Link to='/'>
-                    <button className='save_button_profile' onClick={handleSave}>
-                        Salvar
-                    </button>
-                </Link>
+                <button className='save_button_profile' onClick={handleSave}>
+                    Salvar
+                </button>
             </div>
         </div>
     )
