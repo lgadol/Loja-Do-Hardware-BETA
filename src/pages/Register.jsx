@@ -55,13 +55,11 @@ export const Register = () => {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
-            console.log('Registrado com sucesso');
         } else {
             toast.error(responseData.message, {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
-            console.error('Erro ao se registrar: ', responseData);
         }
     };
 

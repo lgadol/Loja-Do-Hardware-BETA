@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Header } from './components/Header';
 import bcrypt from 'bcryptjs';
+import { toast } from 'react-toastify';
 import './style/Global.css'
 
 export const Login = () => {
@@ -39,13 +40,22 @@ export const Login = () => {
                     localStorage.setItem('isAdmin', user.admin);
                     history.push("/");
                 } else {
-                    alert("Usuário foi desativado.")
+                    toast.error("Usuário foi desativado.", {
+                        autoClose: 2000,
+                        position: 'bottom-right'
+                    });
                 }
             } else {
-                alert("Senha incorreta.")
+                toast.error("Senha incorreta.", {
+                    autoClose: 2000,
+                    position: 'bottom-right'
+                });
             }
         } else {
-            alert("Nome de usuário não existe.")
+            toast.error("Usuário não existe.", {
+                autoClose: 2000,
+                position: 'bottom-right'
+            });
         }
     }
 
