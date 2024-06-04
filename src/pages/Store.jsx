@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle, BsPencilSquare } from 'react-icons/bs';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { DeleteModal } from '../components/DeleteModal';
 import { getItem, setItem } from '../services/LocalStorageFuncs';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -11,6 +11,8 @@ export const Store = () => {
     const [data, setData] = useState([]);
     const [cart, setCart] = useState(getItem('carrinhoYt') || []);
     const [quantities, setQuantities] = useState({});
+    const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const fetchStore = async () => {
         try {
@@ -75,34 +77,38 @@ export const Store = () => {
         }
     }
 
-    const handleDelete = async (obj) => {
-        const confirmation = window.confirm("Você quer excluir este produto?");
-        if (confirmation) {
-            const userId = localStorage.getItem('userId');
-            const response = await fetch(`http://localhost:4000/product/${obj.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id_usuario: userId,
-                    ativo: 0,
-                }),
-            });
+    const handleDelete = (obj) => {
+        setSelectedProduct(obj);
+        setDeleteModalIsOpen(true);
+    }
 
-            if (response.ok) {
-                toast.success("Produto excluído com sucesso!", {
-                    position: "bottom-right",
-                    autoClose: 2000
-                });
-                fetchStore();
-            } else {
-                toast.error("Erro ao excluir o produto.", {
-                    position: "bottom-right",
-                    autoClose: 2000
-                });
-            }
+    const handleConfirmDelete = async () => {
+        const userId = localStorage.getItem('userId');
+        const response = await fetch(`http://localhost:4000/product/${selectedProduct.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_usuario: userId,
+                ativo: 0,
+            }),
+        });
+    
+        if (response.ok) {
+            toast.success("Produto excluído com sucesso!", {
+                position: "bottom-right",
+                autoClose: 2000
+            });
+            fetchStore();
+        } else {
+            toast.error("Erro ao excluir o produto.", {
+                position: "bottom-right",
+                autoClose: 2000
+            });
         }
+        // Feche o modal de confirmação
+        setDeleteModalIsOpen(false);
     }
 
     return (
@@ -133,6 +139,11 @@ export const Store = () => {
                                     {localStorage.getItem('isAdmin') === '1' && <BsTrash3Fill
                                         onClick={() => handleDelete(e)} />}
                                 </button>
+                                <DeleteModal
+                                    isOpen={deleteModalIsOpen}
+                                    onRequestClose={() => setDeleteModalIsOpen(false)}
+                                    onConfirm={handleConfirmDelete}
+                                />
                                 <Link to='/editProduct'>
                                     <button className='edit_button'>
                                         {localStorage.getItem('isAdmin') === '1' && <BsPencilSquare />}

@@ -93,6 +93,7 @@ export const Cart = (props) => {
                         isOpen={modalIsOpen}
                         onRequestClose={() => setModalIsOpen(false)}
                         onConfirm={handleClick}
+                        subTotal={subTotalConvert}
                     />
                 </div>
             )}

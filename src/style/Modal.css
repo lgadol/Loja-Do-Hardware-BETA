@@ -1,0 +1,45 @@
+/* Modal para confirmação de compra na página Cart e exclusão de produto na página Store */
+.pdModalContent h2 {
+    color: black;
+    background-color: #40b7d3;
+    width: 100%;
+}
+
+.pdModalContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 300px;
+    border: 1px solid #40b7d3;
+    border-radius: 10px;
+    background: black;
+    color: #40b7d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.pd_box_content button {
+    border: 1px solid #40b7d3;
+    background-color: black;
+    color: #40b7d3;
+    cursor: pointer;
+    width: 100px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.pd_yes_button:hover {
+    color: green;
+    border: 1px solid green;
+}
+
+.pd_no_button:hover {
+    color: red;
+    border: 1px solid red;
+}
