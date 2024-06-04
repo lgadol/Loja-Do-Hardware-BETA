@@ -1,0 +1,15 @@
+/* ConfirmationModal.css */
+.purchase_modal_overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.purchase_modal_content {
+    color: lightsteelblue;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: #fff;
+}

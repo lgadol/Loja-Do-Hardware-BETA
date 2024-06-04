@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BsFillCartDashFill, BsCartXFill } from 'react-icons/bs';
 import { Header } from '../components/Header';
+import { PurchaseModal } from '../components/PurchaseModal';
 import { toast } from 'react-toastify';
 import '../style/Global.css';
 
 export const Cart = (props) => {
     const [data, setData] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const fetchCart = async () => {
         const userId = localStorage.getItem('userId');
@@ -35,13 +37,6 @@ export const Cart = (props) => {
 
     const handleClick = async () => {
         const userId = localStorage.getItem('userId');
-        const confirmation = window.confirm('Você realmente deseja efetuar a compra de todos os itens do carrinho?');
-
-        if (!confirmation) {
-            console.log('O usuário cancelou a compra.');
-            return;
-        }
-
         const { history: { push } } = props;
 
         const response = await fetch(`http://localhost:4000/cartUser/${userId}`, { method: 'DELETE' });
@@ -90,10 +85,15 @@ export const Cart = (props) => {
                         }
                     </div>
                     <button className='comprar_button_cart'
-                        onClick={handleClick}
+                        onClick={() => setModalIsOpen(true)}
                     >
                         Comprar
                     </button>
+                    <PurchaseModal
+                        isOpen={modalIsOpen}
+                        onRequestClose={() => setModalIsOpen(false)}
+                        onConfirm={handleClick}
+                    />
                 </div>
             )}
         </div>

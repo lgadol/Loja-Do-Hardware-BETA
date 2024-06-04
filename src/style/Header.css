@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .header_div {
     display: flex;
     align-items: center;
@@ -28,7 +32,6 @@ a:hover {
     width: 150px;
     text-align: left;
     margin-bottom: 0;
-    margin-left: 0;
     font-size: 25px;
 }
 

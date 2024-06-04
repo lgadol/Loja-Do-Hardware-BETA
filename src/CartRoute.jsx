@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const CartRoute = ({ component: Component, ...rest }) => {
     const isAuthenticated = localStorage.getItem('userToken') !== null;
@@ -11,7 +12,10 @@ const CartRoute = ({ component: Component, ...rest }) => {
                 isAuthenticated ? (
                     <Component {...props} />
                 ) : (
-                    alert('Você precisa estar logado para acessar o carrinho de compras.'),
+                    toast.error('Você precisa estar logado para acessar o carrinho de compras.', {
+                        autoClose: 2000,
+                        position: 'bottom-right'
+                    }),
                     <Redirect to="/login" />
                 )
             }
