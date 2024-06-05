@@ -1,6 +1,6 @@
 import './App.css';
 import { ToastContainer } from 'react-toastify';
-import { Content } from './Content';
+import { Content } from './Routes/Content';
 import { Footer } from './components/Footer';
 
 function App() {

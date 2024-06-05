@@ -271,6 +271,58 @@ app.post('/registerUser', (req, res) => {
     });
 });
 
+// Consulta para produto filtrado pelo id
+app.get('/editProduct/:id', (req, res) => {
+    const { id } = req.params;
+    lojaHardwareCONN.query('SELECT * FROM produtos_hardware WHERE id = ?', [id], (error, results) => {
+        if (error) throw error;
+        if (results[0]) {
+            res.json(results[0]);
+        } else {
+            res.status(404).json({ message: 'Produto não encontrado' });
+        }
+    });
+});
+
+// Atualizar um produto
+app.put('/editProduct/:id', (req, res) => {
+    const { id } = req.params;
+    const { ativo, nome, descricao, preco, imagem_url } = req.body;
+    const queryUpdate = 'UPDATE produtos_hardware SET ativo = ?, nome = ?, descricao = ?, preco = ?, imagem_url = ? WHERE id = ?';
+    lojaHardwareCONN.query(queryUpdate, [ativo, nome, descricao, preco, imagem_url, id], (error, results) => {
+        if (error) throw error;
+        res.json({ message: 'Produto atualizado com sucesso' });
+    });
+});
+
+// Verificar se um nome do produto já existe
+app.post('/checkProduct/:id', (req, res) => {
+    const { id } = req.params;
+    const { nome } = req.body;
+    lojaHardwareCONN.query('SELECT * FROM produtos_hardware WHERE nome = ? AND id != ?', [nome, id], (error, results) => {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.status(400).json({ message: 'Produto com esse nome já existe.' });
+        } else {
+            res.json({ message: 'Nome do produto disponível.' });
+        }
+    });
+});
+
+// Verificar se uma URL de imagem já está sendo usada
+app.post('/checkUrlImg/:id', (req, res) => {
+    const { id } = req.params;
+    const { img } = req.body;
+    lojaHardwareCONN.query('SELECT * FROM produtos_hardware WHERE imagem_url = ? AND id != ?', [img, id], (error, results) => {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.status(400).json({ message: 'Imagem já está sendo utilizada.' });
+        } else {
+            res.json({ message: 'Imagem disponível.' });
+        }
+    });
+});
+
 app.listen(4000, () => {
     console.log('API rodando na porta 4000');
 });

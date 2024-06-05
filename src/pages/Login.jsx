@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { Header } from './components/Header';
+import { Header } from '../components/Header';
 import bcrypt from 'bcryptjs';
 import { toast } from 'react-toastify';
-import './style/Global.css'
+import '../style/Global.css'
 
 export const Login = () => {
     const [data, setData] = useState([]);

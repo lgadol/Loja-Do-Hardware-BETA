@@ -41,7 +41,7 @@ export const EstadosBrasileiros = ({ value, onChange, className }) => (
     </select>
 );
 
-export const handleInputChange = (event, setEditedUser, editedUser) => {
+export const handleInputUserChange = (event, setEditedUser, editedUser) => {
     const { name, value } = event.target;
     let errorMessage = '';
 
@@ -266,4 +266,90 @@ export const handleRegisterInput = (event, setState, fieldName) => {
     } else {
         setState(value);
     }
+};
+
+/* Página EditProduct */
+
+export const handleInputProductChange = (event, setEditedProduct, editedProduct) => {
+    const { name, value } = event.target;
+    let errorMessage = '';
+
+    switch (name) {
+        case 'nome':
+            if (value.length > 100 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'O nome não pode ter mais de 100 caracteres ou conter caracteres especiais.';
+            }
+            break;
+        case 'descricao':
+            if (value.length > 200 || /[^a-zA-Z\s]/.test(value)) {
+                errorMessage = 'A descrição não pode ter mais de 200 caracteres ou conter caracteres especiais.';
+            }
+            break;
+        case 'preco':
+            if (value.length > 30 || /\D/.test(value)) {
+                errorMessage = 'O número não pode ter mais de 30 caracteres e só pode conter números.';
+            }
+            break;
+        case 'imagem_url':
+            if (value.length > 500) {
+                errorMessage = 'A URL da imagem não pode ter mais de 500 caracteres.';
+            }
+            break;
+        default:
+            break;
+    }
+
+    if (errorMessage) {
+        toast.error(errorMessage, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+    } else {
+        setEditedProduct({
+            ...editedProduct,
+            [name]: value,
+        });
+    }
+};
+
+export const checkProductName = async (product, editedProduct) => {
+    const response = await fetch(`http://localhost:4000/checkProduct/${product.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nome: editedProduct.nome }),
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+        return false;
+    }
+
+    return true;
+};
+
+export const checkImageUrl = async (product, editedProduct) => {
+    const response = await fetch(`http://localhost:4000/checkUrlImg/${product.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ imagem_url: editedProduct.imagem_url }),
+    });
+
+    if (!response.ok) {
+        const { message } = await response.json();
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 2000
+        });
+        return false;
+    }
+
+    return true;
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Header } from '../components/Header'
 import { toast } from 'react-toastify';
 import '../style/Global.css'
-import { EstadosBrasileiros, handleInputChange, checkUser, checkEmail, checkCpf, checkPassword } from '../services/Vars';
+import { EstadosBrasileiros, handleInputUserChange, checkUser, checkEmail, checkCpf, checkPassword } from '../services/Vars';
 
 export const Profile = () => {
     const [user, setUser] = useState(null);
@@ -94,60 +94,60 @@ export const Profile = () => {
                                 type="text"
                                 name="usuario"
                                 value={editedUser.usuario}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="nome"
                                 value={editedUser.nome.toUpperCase()}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="email"
                                 value={editedUser.email}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="cpf"
                                 value={editedUser.cpf}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="rua"
                                 value={editedUser.rua.toUpperCase()}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="bairro"
                                 value={editedUser.bairro.toUpperCase()}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="numero"
                                 value={editedUser.numero}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="cep"
                                 value={editedUser.cep}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <input
                                 type="text"
                                 name="cidade"
                                 value={editedUser.cidade.toUpperCase()}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             < EstadosBrasileiros
                                 className="estadosBR_profile"
                                 value={editedUser.estado}
-                                onChange={(event) => handleInputChange(event, setEditedUser, editedUser)}
+                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
                             />
                             <br />
                             <h3>Confirme com sua senha:</h3>

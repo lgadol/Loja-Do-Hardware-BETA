@@ -94,7 +94,7 @@ export const Store = () => {
                 ativo: 0,
             }),
         });
-    
+
         if (response.ok) {
             toast.success("Produto excluído com sucesso!", {
                 position: "bottom-right",
@@ -144,7 +144,7 @@ export const Store = () => {
                                     onRequestClose={() => setDeleteModalIsOpen(false)}
                                     onConfirm={handleConfirmDelete}
                                 />
-                                <Link to='/editProduct'>
+                                <Link to={`/editProduct/${e.id}`}>
                                     <button className='edit_button'>
                                         {localStorage.getItem('isAdmin') === '1' && <BsPencilSquare />}
                                     </button>
