@@ -194,7 +194,7 @@ app.delete('/cartUser/:id_usuario', (req, res) => {
 
 // Inserir um novo produto
 app.post('/addProduct', (req, res) => {
-    const { ativo, nome, descricao, preco, imagem_url, marca, categoria } = req.body;
+    const { ativo, nome, descricao, preco, imagem_url, marca, categoria, usuario_registro } = req.body;
 
     const queryCheck = 'SELECT * FROM produtos_hardware WHERE nome = ?';
     lojaHardwareCONN.query(queryCheck, [nome], (error, results) => {
@@ -204,8 +204,8 @@ app.post('/addProduct', (req, res) => {
             return;
         }
 
-        const queryInsert = 'INSERT INTO produtos_hardware (ativo, nome, descricao, preco, imagem_url, marca, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        lojaHardwareCONN.query(queryInsert, [ativo, nome, descricao, preco, imagem_url, marca, categoria], (error, results) => {
+        const queryInsert = 'INSERT INTO produtos_hardware (ativo, nome, descricao, preco, imagem_url, marca, categoria, usuario_registro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        lojaHardwareCONN.query(queryInsert, [ativo, nome, descricao, preco, imagem_url, marca, categoria, usuario_registro], (error, results) => {
             if (error) throw error;
             res.json({ message: 'Produto inserido com sucesso' });
         });

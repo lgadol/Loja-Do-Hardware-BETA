@@ -46,6 +46,8 @@ export const Product = () => {
             return;
         }
 
+        const usuario_registro = localStorage.getItem('username');
+
         const response = await fetch(`http://localhost:4000/addProduct`, {
             method: 'POST',
             headers: {
@@ -58,7 +60,8 @@ export const Product = () => {
                 preco,
                 imagem_url,
                 marca: marca.toUpperCase(),
-                categoria
+                categoria,
+                usuario_registro
             })
         });
 
