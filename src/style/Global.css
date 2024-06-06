@@ -250,7 +250,7 @@ body {
 }
 
 .save_button_profile {
-    margin-bottom: 65px !important;
+    margin-bottom: 75px !important;
 }
 
 .save_button_profile:hover {
@@ -424,8 +424,6 @@ body {
     color: white;
     border: solid 1px #40b7d3;
 }
-
-
 
 /* Página Product */
 

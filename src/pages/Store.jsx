@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle, BsPencilSquare } from 'react-icons/bs';
+import { FaStoreAltSlash } from "react-icons/fa";
 import { DeleteModal } from '../components/DeleteModal';
 import { getItem, setItem } from '../services/LocalStorageFuncs';
 import { Link } from 'react-router-dom';
@@ -13,6 +14,7 @@ export const Store = () => {
     const [quantities, setQuantities] = useState({});
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [search, setSearch] = useState('');
 
     const fetchStore = async () => {
         try {
@@ -111,6 +113,8 @@ export const Store = () => {
         setDeleteModalIsOpen(false);
     }
 
+    const filteredData = data.filter(e => e.nome.toUpperCase().includes(search.toUpperCase()));
+
     return (
         <div>
             <Header />
@@ -127,45 +131,54 @@ export const Store = () => {
                 <input
                     type='text'
                     placeholder='Pesquise...'
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
                 />
             </div>
 
             <div className='product_area'>
                 {
-                    data.map((e) => (
-                        <div key={e.id} className='product_div'>
-                            <div className='alter_buttons'>
-                                <button className='trash_button'>
-                                    {localStorage.getItem('isAdmin') === '1' && <BsTrash3Fill
-                                        onClick={() => handleDelete(e)} />}
-                                </button>
-                                <DeleteModal
-                                    isOpen={deleteModalIsOpen}
-                                    onRequestClose={() => setDeleteModalIsOpen(false)}
-                                    onConfirm={handleConfirmDelete}
-                                />
-                                <Link to={`/editProduct/${e.id}`}>
-                                    <button className='edit_button'>
-                                        {localStorage.getItem('isAdmin') === '1' && <BsPencilSquare />}
+                    filteredData.length > 0 ? (
+                        filteredData.map((e) => (
+                            <div key={e.id} className='product_div'>
+                                <div className='alter_buttons'>
+                                    <button className='trash_button'>
+                                        {localStorage.getItem('isAdmin') === '1' && <BsTrash3Fill
+                                            onClick={() => handleDelete(e)} />}
                                     </button>
-                                </Link>
+                                    <DeleteModal
+                                        isOpen={deleteModalIsOpen}
+                                        onRequestClose={() => setDeleteModalIsOpen(false)}
+                                        onConfirm={handleConfirmDelete}
+                                    />
+                                    <Link to={`/editProduct/${e.id}`}>
+                                        <button className='edit_button'>
+                                            {localStorage.getItem('isAdmin') === '1' && <BsPencilSquare />}
+                                        </button>
+                                    </Link>
+                                </div>
+                                <h4>{e.nome}</h4>
+                                <img className="img_product" src={e.imagem_url} alt="" />
+                                <h3>{parseFloat(e.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+                                <div className='cart_div'>
+                                    <input className='cartQuanty_input'
+                                        type="number"
+                                        min="1"
+                                        value={quantities[e.id] || '0'}
+                                        onChange={(event) => handleQuantityChange(e.id, event.target.value)}
+                                    />
+                                    <button className='product_button' onClick={() => handleClick(e)}>
+                                        <BsFillCartPlusFill />
+                                    </button>
+                                </div>
                             </div>
-                            <h4>{e.nome}</h4>
-                            <img className="img_product" src={e.imagem_url} alt="" />
-                            <h3>{parseFloat(e.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
-                            <div className='cart_div'>
-                                <input className='cartQuanty_input'
-                                    type="number"
-                                    min="1"
-                                    value={quantities[e.id] || '0'}
-                                    onChange={(event) => handleQuantityChange(e.id, event.target.value)}
-                                />
-                                <button className='product_button' onClick={() => handleClick(e)}>
-                                    <BsFillCartPlusFill />
-                                </button>
-                            </div>
+                        ))
+                    ) : (
+                        <div style={{ color: "grey", marginBottom: "355px" }}>
+                            <h2>Nenhum produto encontrado</h2>
+                            <FaStoreAltSlash />
                         </div>
-                    ))
+                    )
                 }
             </div>
         </div>
