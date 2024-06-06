@@ -3,19 +3,22 @@ import { Header } from '../components/Header';
 import '../style/Global.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { CategoriasProdutos } from '../services/Vars';
 
 export const Product = () => {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState('');
     const [imagem_url, setImagem] = useState('');
+    const [marca, setMarca] = useState('');
+    const [categoria, setCategoria] = useState('');
 
-    const handleNomeChange = (e) => {
+    const handleNMChange = (e, setState) => {
         const value = e.target.value;
         if (/^[a-zA-Z0-9\s]*$/.test(value)) {
-            setNome(value);
+            setState(value);
         } else {
-            toast.error('O nome do produto deve conter apenas letras e números.', {
+            toast.error('Este campo só pode conter letras e números.', {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
@@ -53,7 +56,9 @@ export const Product = () => {
                 nome: nome.toUpperCase(),
                 descricao: descricao.toUpperCase(),
                 preco,
-                imagem_url
+                imagem_url,
+                marca: marca.toUpperCase(),
+                categoria
             })
         });
 
@@ -88,7 +93,7 @@ export const Product = () => {
                             name="nome"
                             placeholder='Nome do Produto'
                             value={nome.toUpperCase()}
-                            onChange={handleNomeChange}
+                            onChange={e => handleNMChange(e, setNome)}
                         />
                     </div>
                     <div className="input_group">
@@ -116,6 +121,21 @@ export const Product = () => {
                             placeholder='URL da Imagem'
                             value={imagem_url}
                             onChange={e => setImagem(e.target.value)}
+                        />
+                    </div>
+                    <div className="input_group">
+                        <input
+                            type="text"
+                            name="marca"
+                            placeholder='Marca'
+                            value={marca.toUpperCase()}
+                            onChange={e => handleNMChange(e, setMarca)}
+                        />
+                    </div>
+                    <div className="input_group">
+                        <CategoriasProdutos
+                            value={categoria}
+                            onChange={e => setCategoria(e.target.value)}
                         />
                     </div>
                     <div className='product_buttons'>

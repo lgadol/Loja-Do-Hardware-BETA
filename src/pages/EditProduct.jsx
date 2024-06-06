@@ -3,13 +3,14 @@ import { Header } from '../components/Header';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../style/Global.css';
-import { handleInputProductChange, checkProductName, checkImageUrl } from '../services/Vars';
+import { handleInputProductChange, checkProductName, checkImageUrl, CategoriasProdutos } from '../services/Vars';
 
 export const EditProduct = () => {
     let { id } = useParams();
     const [product, setProduct] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const [editedProduct, setEditedProduct] = useState({});
+    const [categoria, setCategoria] = useState('');
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -75,7 +76,7 @@ export const EditProduct = () => {
                 <div>
                     {isEditing ? (
                         <div className='product_editing_div'>
-                            <h2>Editar Produto</h2>
+                        <h2>Editar Produto</h2>
                             <input
                                 type="text"
                                 name="nome"
@@ -105,6 +106,10 @@ export const EditProduct = () => {
                                     });
                                 }}
                             />
+                            <CategoriasProdutos
+                                value={categoria}
+                                onChange={e => setCategoria(e.target.value)}
+                            />
                             <br />
                         </div>
                     ) : (
@@ -116,6 +121,8 @@ export const EditProduct = () => {
                                 <p><strong>Preço: </strong>  {parseFloat(product.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                                 <p><strong>URL da Imagem: </strong>  {product.imagem_url}</p>
                                 <p><strong>Data do Registro: </strong>  {new Date(product.data_registro).toLocaleDateString('pt-BR')}</p>
+                                <p><strong>Marca: </strong>  {product.marca}</p>
+                                <p><strong>Categoria: </strong>  {product.categoria}</p>
                             </div>
                         </div>
                     )}

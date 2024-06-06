@@ -268,6 +268,28 @@ export const handleRegisterInput = (event, setState, fieldName) => {
     }
 };
 
+/* Página Product */
+export const CategoriasProdutos = ({ value, onChange, className }) => (
+    <select
+        className='categorias_produtos'
+        name="categoria"
+        value={value}
+        onChange={onChange}
+    >
+        <option value="">Selecione uma Categoria</option>
+        <option value="PLACA DE VÍDEO">PLACA DE VÍDEO</option>
+        <option value="PROCESSADOR">PROCESSADOR</option>
+        <option value="COOLER">COOLER</option>
+        <option value="FONTE">FONTE</option>
+        <option value="ARMAZENAMENTO">ARMAZENAMENTO</option>
+        <option value="GABINETE">GABINETE</option>
+        <option value="ARMAZENAMENTO">ARMAZENAMENTO</option>
+        <option value="PLACA MÃE">PLACA MÃE</option>
+        <option value="MEMÓRIA RAM">MEMÓRIA RAM</option>
+        <option value="OUTRO">OUTRO</option>
+    </select>
+);
+
 /* Página EditProduct */
 
 export const handleInputProductChange = (event, setEditedProduct, editedProduct) => {
