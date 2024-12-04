@@ -176,8 +176,6 @@ export const Store = () => {
                     ) : (
                         <div style={{ color: "grey", marginBottom: "355px" }}>
                             <h2>Nenhum produto encontrado</h2>
-                            <h1>Teste teste</h1>
-                            <h3>figue petequeiro</h3>
                             <FaStoreAltSlash />
                         </div>
                     )
