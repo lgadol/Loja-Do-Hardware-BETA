@@ -90,65 +90,93 @@ export const Profile = () => {
                     {isEditing ? (
                         <div className='profile_editing_div'>
                             <h2>Editar Perfil</h2>
-                            <input
-                                type="text"
-                                name="usuario"
-                                value={editedUser.usuario}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="nome"
-                                value={editedUser.nome.toUpperCase()}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="email"
-                                value={editedUser.email}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="cpf"
-                                value={editedUser.cpf}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="rua"
-                                value={editedUser.rua.toUpperCase()}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="bairro"
-                                value={editedUser.bairro.toUpperCase()}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="numero"
-                                value={editedUser.numero}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="cep"
-                                value={editedUser.cep}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            <input
-                                type="text"
-                                name="cidade"
-                                value={editedUser.cidade.toUpperCase()}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
-                            < EstadosBrasileiros
-                                className="estadosBR_profile"
-                                value={editedUser.estado}
-                                onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
-                            />
+                            <div className='input_group'>
+                                <input
+                                    type="text"
+                                    name="usuario"
+                                    placeholder='Usuário'
+                                    value={editedUser.usuario}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="nome"
+                                    placeholder='Nome'
+                                    value={editedUser.nome.toUpperCase()}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="email"
+                                    placeholder='E-mail'
+                                    value={editedUser.email}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="cpf"
+                                    placeholder='CPF'
+                                    value={editedUser.cpf}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="rua"
+                                    placeholder='Rua'
+                                    value={editedUser.rua.toUpperCase()}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="bairro"
+                                    placeholder='Bairro'
+                                    value={editedUser.bairro.toUpperCase()}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="numero"
+                                    placeholder='Número'
+                                    value={editedUser.numero}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="cep"
+                                    placeholder='CEP'
+                                    value={editedUser.cep}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                <input
+                                    type="text"
+                                    name="cidade"
+                                    placeholder='Cidade'
+                                    value={editedUser.cidade.toUpperCase()}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
+                            <div className="input_group">
+                                < EstadosBrasileiros
+                                    value={editedUser.estado}
+                                    onChange={(event) => handleInputUserChange(event, setEditedUser, editedUser)}
+                                />
+                            </div>
                             <br />
                             <h3>Confirme com sua senha:</h3>
                             <input

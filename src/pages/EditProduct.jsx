@@ -29,43 +29,57 @@ export const EditProduct = () => {
     }, [isEditing]);
 
     const handleSave = async () => {
-        // Verificar se o nome já existe
-        const isProductNameValid = await checkProductName(product, editedProduct);
-        if (!isProductNameValid) return;
 
-        // Verificar se a URL de imagem já existe
-        const isImageUrlValid = await checkImageUrl(product, editedProduct);
-        if (!isImageUrlValid) return;
-
-        const response = await fetch(`http://localhost:4000/editProduct/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(editedProduct),
-        });
-
-        if (response.ok) {
-            setIsEditing(false);
-            toast.success('Dados alterados com sucesso!', {
+        if (
+            !editedProduct.nome ||
+            !editedProduct.descricao ||
+            !editedProduct.preco ||
+            !editedProduct.imagem_url
+        ) {
+            toast.error('Preencha todos os campos!', {
                 position: "bottom-right",
                 autoClose: 2000
             });
-
-            // Refazer a solicitação para buscar os dados do produto
-            const fetchProduct = async () => {
-                const response = await fetch(`http://localhost:4000/editProduct/${id}`);
-                if (response.ok) {
-                    const productData = await response.json();
-                    setProduct(productData);
-                } else {
-                    console.error('Erro ao buscar os dados do produto: ', await response.json());
-                }
-            }
-
-            fetchProduct();
         } else {
-            console.error('Erro ao atualizar o produto: ', await response.json());
+
+            // Verificar se o nome já existe
+            const isProductNameValid = await checkProductName(product, editedProduct);
+            if (!isProductNameValid) return;
+
+            // Verificar se a URL de imagem já existe
+            const isImageUrlValid = await checkImageUrl(product, editedProduct);
+            if (!isImageUrlValid) return;
+
+            const response = await fetch(`http://localhost:4000/editProduct/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(editedProduct),
+            });
+
+            if (response.ok) {
+                setIsEditing(false);
+                toast.success('Dados alterados com sucesso!', {
+                    position: "bottom-right",
+                    autoClose: 2000
+                });
+
+                // Refazer a solicitação para buscar os dados do produto
+                const fetchProduct = async () => {
+                    const response = await fetch(`http://localhost:4000/editProduct/${id}`);
+                    if (response.ok) {
+                        const productData = await response.json();
+                        setProduct(productData);
+                    } else {
+                        console.error('Erro ao buscar os dados do produto: ', await response.json());
+                    }
+                }
+
+                fetchProduct();
+            } else {
+                console.error('Erro ao atualizar o produto: ', await response.json());
+            }
         }
     };
 
@@ -76,40 +90,54 @@ export const EditProduct = () => {
                 <div>
                     {isEditing ? (
                         <div className='product_editing_div'>
-                        <h2>Editar Produto</h2>
-                            <input
-                                type="text"
-                                name="nome"
-                                value={editedProduct.nome.toUpperCase()}
-                                onChange={(event) => handleInputProductChange(event, setEditedProduct, editedProduct)}
-                            />
-                            <input
-                                type="text"
-                                name="descricao"
-                                value={editedProduct.descricao.toUpperCase()}
-                                onChange={(event) => handleInputProductChange(event, setEditedProduct, editedProduct)}
-                            />
-                            <input
-                                type="text"
-                                name="preco"
-                                value={editedProduct.preco}
-                                onChange={(event) => handleInputProductChange(event, setEditedProduct, editedProduct)}
-                            />
-                            <input
-                                type="text"
-                                name="imagem_url"
-                                value={editedProduct.imagem_url}
-                                onChange={(event) => {
-                                    setEditedProduct({
-                                        ...editedProduct,
-                                        imagem_url: event.target.value
-                                    });
-                                }}
-                            />
-                            <CategoriasProdutos
-                                value={categoria}
-                                onChange={e => setCategoria(e.target.value)}
-                            />
+                            <h2>Editar Produto</h2>
+                            <div className='input_group'>
+                                <input
+                                    type="text"
+                                    name="nome"
+                                    placeholder='Nome do Produto'
+                                    value={editedProduct.nome.toUpperCase()}
+                                    onChange={(event) => handleInputProductChange(event, setEditedProduct, editedProduct)}
+                                />
+                            </div>
+                            <div className='input_group'>
+                                <input
+                                    type="text"
+                                    name="descricao"
+                                    placeholder='Descrição'
+                                    value={editedProduct.descricao.toUpperCase()}
+                                    onChange={(event) => handleInputProductChange(event, setEditedProduct, editedProduct)}
+                                />
+                            </div>
+                            <div className='input_group'>
+                                <input
+                                    type="text"
+                                    name="preco"
+                                    placeholder='Preço'
+                                    value={editedProduct.preco}
+                                    onChange={(event) => handleInputProductChange(event, setEditedProduct, editedProduct)}
+                                />
+                            </div>
+                            <div className='input_group'>
+                                <input
+                                    type="text"
+                                    name="imagem_url"
+                                    placeholder='URL da Imagem do Produto'
+                                    value={editedProduct.imagem_url}
+                                    onChange={(event) => {
+                                        setEditedProduct({
+                                            ...editedProduct,
+                                            imagem_url: event.target.value
+                                        });
+                                    }}
+                                />
+                            </div>
+                            <div className='input_group'>
+                                <CategoriasProdutos
+                                    value={categoria}
+                                    onChange={e => setCategoria(e.target.value)}
+                                />
+                            </div>
                             <br />
                         </div>
                     ) : (

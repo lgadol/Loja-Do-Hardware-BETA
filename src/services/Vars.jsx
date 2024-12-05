@@ -298,13 +298,13 @@ export const handleInputProductChange = (event, setEditedProduct, editedProduct)
 
     switch (name) {
         case 'nome':
-            if (value.length > 100 || /[^a-zA-Z\s]/.test(value)) {
-                errorMessage = 'O nome não pode ter mais de 100 caracteres ou conter caracteres especiais.';
+            if (value.length > 100) {
+                errorMessage = 'O nome não pode ter mais de 100 caracteres.';
             }
             break;
         case 'descricao':
-            if (value.length > 200 || /[^a-zA-Z\s]/.test(value)) {
-                errorMessage = 'A descrição não pode ter mais de 200 caracteres ou conter caracteres especiais.';
+            if (value.length > 200) {
+                errorMessage = 'A descrição não pode ter mais de 200 caracteres.';
             }
             break;
         case 'preco':
@@ -318,7 +318,6 @@ export const handleInputProductChange = (event, setEditedProduct, editedProduct)
             }
             break;
         default:
-            break;
     }
 
     if (errorMessage) {
