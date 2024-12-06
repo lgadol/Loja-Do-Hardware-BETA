@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 const lojaHardwareCONN = createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    host: "192.168.0.254",
+    user: "root",
+    password: "admin",
+    database: "loja_do_hardware"
 });
 
 //Consulta para produtos ativos
