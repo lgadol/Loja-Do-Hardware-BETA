@@ -10,6 +10,7 @@ body {
     gap: 50px;
     background-color: rgb(37, 37, 37);
     border-bottom: 3px solid #40b7d3;
+    color: #40b7d3;
 }
 
 .header_p,
@@ -44,4 +45,89 @@ a:hover {
 .header_logo {
     width: 200px;
     height: auto;
+}
+
+/* Responsividade Cabecalho */
+
+@media screen and (max-width: 550px) {
+
+    .header_div {
+        gap: 30px;
+    }
+
+    .store_icon,
+    .cart_icon,
+    .exit_p,
+    .enter_p {
+        display: none;
+        flex-direction: column;
+    }
+
+    .header_p {
+        font-size: 11px;
+    }
+
+    .header_logo {
+        width: 120px;
+    }
+}
+
+@media screen and (min-width: 551px) {
+    .bars_icon {
+        display: none;
+    }
+}
+
+
+/* Bandeja */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Quando a bandeja estiver aberta */
+.drawer.open {
+    transform: translateX(0);
+}
+
+.drawer_close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: #40b7d3;
+}
+
+.drawer-button {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #40b7d3;
+}
+
+.drawer-button:hover {
+    background-color: #444;
+}
+
+.drawer-button svg {
+    margin-right: 10px;
 }

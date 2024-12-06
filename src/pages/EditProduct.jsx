@@ -147,7 +147,7 @@ export const EditProduct = () => {
                                 <p><strong>Nome: </strong>  {product.nome}</p>
                                 <p><strong>Descrição: </strong>  {product.descricao}</p>
                                 <p><strong>Preço: </strong>  {parseFloat(product.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
-                                <p><strong>URL da Imagem: </strong>  {product.imagem_url}</p>
+                                <p><strong>URL da Imagem: </strong>  ...</p>
                                 <p><strong>Data do Registro: </strong>  {new Date(product.data_registro).toLocaleDateString('pt-BR')}</p>
                                 <p><strong>Marca: </strong>  {product.marca}</p>
                                 <p><strong>Categoria: </strong>  {product.categoria}</p>

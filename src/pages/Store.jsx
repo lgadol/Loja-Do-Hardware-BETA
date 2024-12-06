@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle, BsPencilSquare } from 'react-icons/bs';
-import { FaStoreAltSlash } from "react-icons/fa";
+import { FaSearch, FaStoreAltSlash } from "react-icons/fa";
 import { DeleteModal } from '../components/DeleteModal';
 import { getItem, setItem } from '../services/LocalStorageFuncs';
 import { Link } from 'react-router-dom';
