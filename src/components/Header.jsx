@@ -57,9 +57,13 @@ export const Header = () => {
                 <FaBars className="drawer_close" onClick={toggleDrawer}></FaBars>
                 <Link to="/" className="drawer-button"><FaStore /> Loja</Link>
                 <Link to="/cart" className="drawer-button"><FaShoppingCart /> Carrinho</Link>
-                <a className="drawer-button" onClick={handleLogout}><FaSignOutAlt /> Sair</a>
-            </div>
+                {userName ? (
+                    <a className="drawer-button" onClick={handleLogout}><FaSignOutAlt color='red' /> Sair</a>
 
+                ) : (
+                    <Link to="/login" className="enter_p"><FaSignInAlt /> Entrar</Link>
+                )}
+            </div>
         </div>
     )
 }
