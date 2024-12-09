@@ -12,6 +12,7 @@ export const Header = () => {
 
     useEffect(() => {
         setUserName(localStorage.getItem('userName'));
+        console.log("userName:", userName);
     }, []);
 
     const handleLogout = () => {
@@ -26,7 +27,7 @@ export const Header = () => {
 
     const closeDrawer = (e) => {
         if (e.target.classList.contains("overlay")) {
-            setIsDrawerOpen(false);  // Fecha a bandeja ao clicar na overlay
+            setIsDrawerOpen(false);
         }
     };
 
@@ -58,8 +59,10 @@ export const Header = () => {
                 <Link to="/" className="drawer-button"><FaStore /> Loja</Link>
                 <Link to="/cart" className="drawer-button"><FaShoppingCart /> Carrinho</Link>
                 {userName ? (
-                    <a className="drawer-button" onClick={handleLogout}><FaSignOutAlt color='red' /> Sair</a>
+                    <>
+                        <a className="exit_p" onClick={handleLogout}><FaSignOutAlt /> Sair</a>
 
+                    </>
                 ) : (
                     <Link to="/login" className="enter_p"><FaSignInAlt /> Entrar</Link>
                 )}

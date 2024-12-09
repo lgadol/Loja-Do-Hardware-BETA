@@ -131,3 +131,36 @@ a:hover {
 .drawer-button svg {
     margin-right: 10px;
 }
+
+.drawer .enter_p {
+    display: block;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: #40b7d3;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.drawer .enter_p:hover {
+    background-color: #444;
+}
+
+.drawer .exit_p {
+    display: block;
+    margin-top: 510px;
+    background-color: transparent;
+    color: red;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.drawer .exit_p:hover {
+    background-color: #444;
+}
+
