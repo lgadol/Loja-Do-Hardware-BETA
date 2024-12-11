@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill, BsTrash3Fill, BsPlusCircle, BsPencilSquare } from 'react-icons/bs';
-import { FaSearch, FaStoreAltSlash } from "react-icons/fa";
+import { FaSearch, FaStoreAltSlash, FaStar } from "react-icons/fa";
 import { DeleteModal } from '../components/DeleteModal';
 import { getItem, setItem } from '../services/LocalStorageFuncs';
 import { Link } from 'react-router-dom';
@@ -40,16 +40,27 @@ export const Store = () => {
 
     const handleClick = async (obj) => {
         const userId = localStorage.getItem('userId');
-        const quantity = quantities[obj.id] || '0';
+        const quantity = quantities[obj.id] || '1';
 
-        if (quantity === '0') {
-            toast.error('O valor mínimo para adicionar é 1.', {
+        // Verificar se o usuário está logado antes de qualquer ação
+        if (!userId) {
+            toast.warn('Você precisa estar logado para adicionar ao carrinho!', {
                 autoClose: 2000,
-                position: 'bottom-right'
+                position: 'bottom-right',
             });
             return;
         }
 
+        // Verificar se a quantidade é válida
+        if (quantity === '0') {
+            toast.error('O valor mínimo para adicionar é 1.', {
+                autoClose: 2000,
+                position: 'bottom-right',
+            });
+            return;
+        }
+
+        // Adicionar o item ao carrinho local
         setCart([...cart, obj]);
         setItem('carrinhoYt', [...cart, obj]);
 
@@ -66,18 +77,19 @@ export const Store = () => {
             }),
         });
 
+        // Mensagens baseadas na resposta da API
         if (response.ok) {
             toast.success('Produto adicionado ao carrinho com sucesso!', {
                 autoClose: 2000,
-                position: 'bottom-right'
+                position: 'bottom-right',
             });
         } else {
             toast.error('Houve um problema ao adicionar o produto ao carrinho.', {
                 autoClose: 2000,
-                position: 'bottom-right'
+                position: 'bottom-right',
             });
         }
-    }
+    };
 
     const handleDelete = (obj) => {
         setSelectedProduct(obj);
@@ -135,12 +147,31 @@ export const Store = () => {
                     onChange={e => setSearch(e.target.value)}
                 />
             </div>
-
             <div className='product_area'>
                 {
                     filteredData.length > 0 ? (
                         filteredData.map((e) => (
+
                             <div key={e.id} className='product_div'>
+                                <Link to={`/productPage/${e.id}`}>
+                                    <h4>{e.nome}</h4>
+                                    <img className="img_product" src={e.imagem_url} alt="" />
+                                </Link>
+                                <h3>{parseFloat(e.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+                                <h5 className='avaliation_prduct'>Avaliação: {e.avaliacao_media} <FaStar style={{ color: 'gold' }} />
+                                    <span className='total_avaliation'> ({e.total_avaliacoes})</span>
+                                </h5>
+                                <div className='cart_div'>
+                                    <input className='cartQuanty_input'
+                                        type="number"
+                                        min="1"
+                                        value={quantities[e.id] || '1'}
+                                        onChange={(event) => handleQuantityChange(e.id, event.target.value)}
+                                    />
+                                    <button className='product_button' onClick={() => handleClick(e)}>
+                                        <BsFillCartPlusFill />
+                                    </button>
+                                </div>
                                 <div className='alter_buttons'>
                                     <button className='trash_button'>
                                         {localStorage.getItem('isAdmin') === '1' && <BsTrash3Fill
@@ -157,21 +188,8 @@ export const Store = () => {
                                         </button>
                                     </Link>
                                 </div>
-                                <h4>{e.nome}</h4>
-                                <img className="img_product" src={e.imagem_url} alt="" />
-                                <h3>{parseFloat(e.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
-                                <div className='cart_div'>
-                                    <input className='cartQuanty_input'
-                                        type="number"
-                                        min="1"
-                                        value={quantities[e.id] || '0'}
-                                        onChange={(event) => handleQuantityChange(e.id, event.target.value)}
-                                    />
-                                    <button className='product_button' onClick={() => handleClick(e)}>
-                                        <BsFillCartPlusFill />
-                                    </button>
-                                </div>
                             </div>
+
                         ))
                     ) : (
                         <div style={{ color: "grey", marginBottom: "355px" }}>

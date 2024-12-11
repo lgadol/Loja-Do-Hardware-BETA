@@ -167,6 +167,6 @@ export const EditProduct = () => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 

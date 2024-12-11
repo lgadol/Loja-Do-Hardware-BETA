@@ -12,11 +12,13 @@ import { Payment } from "../pages/Payment";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { EditProduct } from "../pages/EditProduct";
+import { ProductPage } from "../pages/ProductPage";
 
 export const Content = () => {
     return (
         <Switch>
             <Route exact path='/' component={Store} />
+            <Route exact path='/productPage/:id' component={ProductPage} />
             <CartRoute exact path='/cart' component={Cart} />
             <ProtectedRoute exact path='/profile' component={Profile} />
             <AdminRoute exact path='/product' component={Product} />
