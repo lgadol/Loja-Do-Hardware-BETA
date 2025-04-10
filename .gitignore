@@ -6,9 +6,6 @@
 /.pnp
 .pnp.js
 
-# DB Config
-/server/.env
-
 # testing
 /coverage
 
