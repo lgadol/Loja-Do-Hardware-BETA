@@ -8,6 +8,8 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
+const port = 4000;
+
 const lojaHardwareCONN = createConnection({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -324,6 +326,6 @@ app.post('/checkUrlImg/:id', (req, res) => {
     });
 });
 
-app.listen(4000, () => {
-    console.log('API rodando na porta 4000');
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta: ${port}`);
 });
