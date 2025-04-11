@@ -35,7 +35,7 @@ export const Footer = () => {
                     </div>
                 </div>
             </div>
-            <p class="rodape-direitos">Pedro Henryke Gado © 2024 – Todos os Direitos Reservados.</p>
+            <p class="rodape-direitos">Pedro Henryke Gado © 2025 – Todos os Direitos Reservados.</p>
         </footer>
     )
 }
