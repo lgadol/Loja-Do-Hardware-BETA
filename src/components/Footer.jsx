@@ -17,7 +17,9 @@ export const Footer = () => {
                     <div class="rodape-div-2-coluna">
 
                         <span><b>Contatos</b></span>
-                        <p>pedro.gado03@gmail.com</p>
+                        <p>
+                            <Link to="/#">pedrogadodev@gmail.com</Link>
+                        </p>
                         <p>+55 54 99900-0000</p>
                     </div>
                 </div>
