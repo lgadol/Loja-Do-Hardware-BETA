@@ -62,8 +62,8 @@ export const handleInputUserChange = (event, setEditedUser, editedUser) => {
             }
             break;
         case 'cpf':
-            if (value.length > 11 || /\D/.test(value)) {
-                errorMessage = 'O CPF não pode ter mais de 11 caracteres e só pode conter números';
+            if (value.length > 11 || /\D/.test(value) || value.length < 11) {
+                errorMessage = 'Insira um CPF válido';
             }
             break;
         case 'rua':
@@ -82,8 +82,8 @@ export const handleInputUserChange = (event, setEditedUser, editedUser) => {
             }
             break;
         case 'cep':
-            if (value.length > 8 || /\D/.test(value)) {
-                errorMessage = 'O CEP não pode ter mais de 8 caracteres e só pode conter números';
+            if (value.length > 8 || /\D/.test(value) || value.length < 8) {
+                errorMessage = 'Insira um CEP válido';
             }
             break;
         case 'cidade':
@@ -218,10 +218,13 @@ export const handleRegisterInput = (event, setState, fieldName) => {
             if (value.length > 50) {
                 errorMessage = 'O email não pode ter mais de 50 caracteres';
             }
+            if (value.length < 5) {
+                errorMessage = 'Insira um e-mail válido';
+            }
             break;
         case 'cpf':
-            if (value.length > 11 || /\D/.test(value)) {
-                errorMessage = 'O CPF não pode ter mais de 11 caracteres e só pode conter números';
+            if (value.length > 11 || /\D/.test(value) || value.length < 11) {
+                errorMessage = 'Insira um CPF válido';
             }
             break;
         case 'rua':
@@ -240,8 +243,8 @@ export const handleRegisterInput = (event, setState, fieldName) => {
             }
             break;
         case 'cep':
-            if (value.length > 8 || /\D/.test(value)) {
-                errorMessage = 'O CEP não pode ter mais de 8 caracteres e só pode conter números';
+            if (value.length > 8 || /\D/.test(value) || value.length < 8) {
+                errorMessage = 'Insira um CEP válido';
             }
             break;
         case 'cidade':

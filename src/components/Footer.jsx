@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/Footer.css';
 import logo1 from '../img/loja-do-hardware-logo.png';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const Footer = () => {
     return (
@@ -31,7 +32,9 @@ export const Footer = () => {
                 <div class="rodape-div-4">
                     <div class="rodape-div-4-coluna">
                         <span><b>Outros</b></span>
-                        <p>Políticas de Privacidade</p>
+                        <p>
+                            <Link to="/privacyPolicies">Políticas de Privacidade</Link>
+                        </p>
                     </div>
                 </div>
             </div>

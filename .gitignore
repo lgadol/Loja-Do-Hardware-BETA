@@ -5,6 +5,8 @@
 /server/node_modules
 /.pnp
 .pnp.js
+dist/
+build/
 
 # testing
 /coverage
@@ -19,6 +21,40 @@
 .env.test.local
 .env.production.local
 
+
+# === LOGS ===
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+debug.log
+
+# === OS / IDE FILES ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# === BUBBLEWRAP / ANDROID ===
+*.apk
+*.aab
+
+# Pasta de build (Android Studio)
+android/app/build/
+android/.gradle/
+android/.idea/
+android/local.properties
+android/build/
+
+# === MISC ===
+*.keystore
+*.jks
+*.log
+
+# Bubblewrap arquivos temporários:
+.twa-manifest.json
+*.iml
+
+# Keysotre
+**/*.keystore
+**/*.jks

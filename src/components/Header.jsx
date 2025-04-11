@@ -12,7 +12,6 @@ export const Header = () => {
 
     useEffect(() => {
         setUserName(localStorage.getItem('userName'));
-        console.log("userName:", userName);
     }, []);
 
     const handleLogout = () => {

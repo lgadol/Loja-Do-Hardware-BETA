@@ -13,6 +13,7 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { EditProduct } from "../pages/EditProduct";
 import { ProductPage } from "../pages/ProductPage";
+import { PrivacyPolicies } from "../pages/PrivacyPolicies";
 
 export const Content = () => {
     return (
@@ -26,6 +27,7 @@ export const Content = () => {
             <AdminRoute exact path='/editProduct/:id' component={EditProduct} />
             <LoginRoute exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
+            <Route exact path='/privacyPolicies' component={PrivacyPolicies} />
         </Switch>
     )
 }
