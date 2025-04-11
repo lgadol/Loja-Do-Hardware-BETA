@@ -16,7 +16,7 @@ export const ProductPage = () => {
         const fetchProduct = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:4000/editProduct/${id}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/editProduct/${id}`);
                 if (response.ok) {
                     const productData = await response.json();
                     setProduct(productData);
@@ -56,7 +56,7 @@ export const ProductPage = () => {
         setItem('carrinhoYt', [...cart, obj]);
 
         // Adicionar item ao carrinho no banco de dados
-        const response = await fetch('http://localhost:4000/cart', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

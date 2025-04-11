@@ -13,7 +13,7 @@ export const Profile = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const userId = localStorage.getItem('userId');
-            const response = await fetch(`http://localhost:4000/users/${userId}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/${userId}`);
 
             if (response.ok) {
                 const userData = await response.json();
@@ -49,7 +49,7 @@ export const Profile = () => {
         const isPasswordValid = await checkPassword(user, editedUser);
         if (!isPasswordValid) return;
 
-        const response = await fetch(`http://localhost:4000/users/${user.id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const Profile = () => {
             // Refazer a solicitação para buscar os dados do usuário
             const fetchUser = async () => {
                 const userId = localStorage.getItem('userId');
-                const response = await fetch(`http://localhost:4000/users/${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${userId}`);
                 if (response.ok) {
                     const userData = await response.json();
                     setUser(userData);

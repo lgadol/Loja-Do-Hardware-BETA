@@ -16,7 +16,7 @@ export const Login = () => {
     useEffect(() => {
         const fetchApi = async () => {
             try {
-                const url = 'http://localhost:4000/users';
+                const url = `${process.env.REACT_APP_API_URL}/users`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setData(data);

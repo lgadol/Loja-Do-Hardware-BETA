@@ -18,7 +18,7 @@ export const Store = () => {
 
     const fetchStore = async () => {
         try {
-            const url = 'http://localhost:4000/';
+            const url = `${process.env.REACT_APP_API_URL}`;
             const response = await fetch(url);
             const data = await response.json();
             setData(data);
@@ -65,7 +65,7 @@ export const Store = () => {
         setItem('carrinhoYt', [...cart, obj]);
 
         // Adicionar item ao carrinho no banco de dados
-        const response = await fetch('http://localhost:4000/cart', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export const Store = () => {
 
     const handleConfirmDelete = async () => {
         const userId = localStorage.getItem('userId');
-        const response = await fetch(`http://localhost:4000/product/${selectedProduct.id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/product/${selectedProduct.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

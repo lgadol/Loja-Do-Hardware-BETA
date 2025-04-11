@@ -14,7 +14,7 @@ export const EditProduct = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const response = await fetch(`http://localhost:4000/editProduct/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/editProduct/${id}`);
 
             if (response.ok) {
                 const productData = await response.json();
@@ -50,7 +50,7 @@ export const EditProduct = () => {
             const isImageUrlValid = await checkImageUrl(product, editedProduct);
             if (!isImageUrlValid) return;
 
-            const response = await fetch(`http://localhost:4000/editProduct/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/editProduct/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const EditProduct = () => {
 
                 // Refazer a solicitação para buscar os dados do produto
                 const fetchProduct = async () => {
-                    const response = await fetch(`http://localhost:4000/editProduct/${id}`);
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/editProduct/${id}`);
                     if (response.ok) {
                         const productData = await response.json();
                         setProduct(productData);

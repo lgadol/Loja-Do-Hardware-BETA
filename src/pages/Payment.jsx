@@ -9,7 +9,7 @@ export const Payment = (props) => {
     useEffect(() => {
         const fetchUser = async () => {
             const userId = localStorage.getItem('userId');
-            const response = await fetch(`http://localhost:4000/users/${userId}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${userId}`);
 
             if (response.ok) {
                 const userData = await response.json();

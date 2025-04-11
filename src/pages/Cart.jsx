@@ -11,7 +11,7 @@ export const Cart = (props) => {
 
     const fetchCart = async () => {
         const userId = localStorage.getItem('userId');
-        const response = await fetch(`http://localhost:4000/cart/${userId}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/${userId}`);
         if (response.ok) {
             const cartData = await response.json();
             setData(cartData);
@@ -25,7 +25,7 @@ export const Cart = (props) => {
     }, []);
 
     const removeItem = async (obj) => {
-        await fetch(`http://localhost:4000/cart/${obj.id}`, {
+        await fetch(`${process.env.REACT_APP_API_URL}/${obj.id}`, {
             method: 'DELETE',
         });
 
@@ -39,7 +39,7 @@ export const Cart = (props) => {
         const userId = localStorage.getItem('userId');
         const { history: { push } } = props;
 
-        const response = await fetch(`http://localhost:4000/cartUser/${userId}`, { method: 'DELETE' });
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/cartUser/${userId}`, { method: 'DELETE' });
 
         if (response.ok) {
             toast.success('Compra efetuada e carrinho zerado', {
