@@ -8,7 +8,7 @@ body {
     justify-content: center;
     width: 100%;
     gap: 50px;
-    background-color: rgb(37, 37, 37);
+    background-color: #252525;
     border-bottom: 3px solid #40b7d3;
     color: #40b7d3;
 }
