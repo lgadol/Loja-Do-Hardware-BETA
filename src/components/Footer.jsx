@@ -18,7 +18,7 @@ export const Footer = () => {
 
                         <span><b>Contatos</b></span>
                         <p>
-                            <Link to="/#">pedrogadodev@gmail.com</Link>
+                            <a href="#e-mail">pedrogadodev@gmail.com</a>
                         </p>
                         <p>+55 54 99900-0000</p>
                     </div>
