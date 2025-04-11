@@ -72,7 +72,6 @@ export const Product = () => {
                 autoClose: 2000,
                 position: 'bottom-right'
             });
-            console.log('Dados salvos com sucesso');
         } else {
             toast.error(responseData.message, {
                 autoClose: 2000,

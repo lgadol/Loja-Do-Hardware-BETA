@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../style/Header.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FaCrown, FaUser, FaSignInAlt, FaShoppingCart, FaStore, FaSignOutAlt, FaBars } from 'react-icons/fa';
-import logo from '../img/loja-do-hardware-2.png';
+import logo from '../img/loja-do-hardware-logo.png';
 
 export const Header = () => {
     const [userName, setUserName] = useState(localStorage.getItem('userName'));
