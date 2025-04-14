@@ -13,7 +13,7 @@ export const Profile = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const userId = localStorage.getItem('userId');
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/${userId}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${userId}`);
 
             if (response.ok) {
                 const userData = await response.json();
